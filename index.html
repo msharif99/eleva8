@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elev8 Health — Elevate Your Wellness</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Playfair+Display:ital,wght@0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0a0e17;
+    --bg-card: #111827;
+    --bg-card-hover: #1a2332;
+    --accent-teal: #2dd4bf;
+    --accent-teal-dim: rgba(45, 212, 191, 0.15);
+    --accent-gold: #f59e0b;
+    --accent-rose: #f43f5e;
+    --accent-blue: #3b82f6;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border: rgba(255,255,255,0.06);
+    --glow-teal: 0 0 60px rgba(45, 212, 191, 0.15);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ─── GLOBAL GRAIN OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(20px);
+    background: rgba(10, 14, 23, 0.8);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--accent-teal), #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .nav-logo span { font-weight: 400; opacity: 0.7; }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent-teal); }
+  .nav-cta {
+    background: var(--accent-teal) !important;
+    color: var(--bg-deep) !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 100px;
+    font-weight: 600 !important;
+    transition: transform 0.3s, box-shadow 0.3s !important;
+  }
+  .nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(45, 212, 191, 0.3);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+    animation: float 20s ease-in-out infinite;
+  }
+  .hero-bg-orb:nth-child(1) {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.3), transparent);
+    top: -200px; right: -100px;
+  }
+  .hero-bg-orb:nth-child(2) {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.25), transparent);
+    bottom: -150px; left: -100px;
+    animation-delay: -10s;
+  }
+  .hero-bg-orb:nth-child(3) {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.2), transparent);
+    top: 40%; left: 60%;
+    animation-delay: -5s;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -30px) scale(1.05); }
+    66% { transform: translate(-20px, 20px) scale(0.95); }
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent-teal-dim);
+    border: 1px solid rgba(45, 212, 191, 0.2);
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    color: var(--accent-teal);
+    font-weight: 500;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease-out;
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease-out 0.1s both;
+  }
+  .hero h1 em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    background: linear-gradient(135deg, var(--accent-teal), #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 0.8s ease-out 0.2s both;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s ease-out 0.3s both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── BUTTONS ─── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent-teal), #06b6d4);
+    color: var(--bg-deep);
+    box-shadow: 0 4px 20px rgba(45, 212, 191, 0.25);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(45, 212, 191, 0.4);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .btn-outline:hover {
+    border-color: var(--accent-teal);
+    background: var(--accent-teal-dim);
+  }
+  .btn-gold {
+    background: linear-gradient(135deg, var(--accent-gold), #d97706);
+    color: var(--bg-deep);
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(245, 158, 11, 0.35);
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 2rem; }
+  .section-label {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--accent-teal);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ─── HOW IT WORKS (STEP 1: Rx ACCESS HUB) ─── */
+  .rx-hub {
+    background: linear-gradient(180deg, transparent, rgba(45, 212, 191, 0.03), transparent);
+  }
+  .rx-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .rx-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .rx-step:hover {
+    transform: translateY(-4px);
+    border-color: rgba(45, 212, 191, 0.2);
+  }
+  .rx-step-num {
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, rgba(45, 212, 191, 0.15), transparent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .rx-step h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .rx-step p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  /* ─── ZORROCARD EMBED (STEP 2: REFERRAL FUNNEL) ─── */
+  .zorro-embed {
+    position: relative;
+    overflow: hidden;
+  }
+  .zorro-embed-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+  .zorro-info h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .zorro-info p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+  }
+  .zorro-features {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+  .zorro-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+  .zorro-features li .icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--accent-teal-dim);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-teal);
+    font-size: 0.8rem;
+    margin-top: 2px;
+  }
+  .zorro-frame-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--glow-teal);
+    position: relative;
+  }
+  .zorro-frame-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+  }
+  .zorro-frame-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+  }
+  .zorro-frame-dot:nth-child(1) { background: #f43f5e; }
+  .zorro-frame-dot:nth-child(2) { background: #f59e0b; }
+  .zorro-frame-dot:nth-child(3) { background: #22c55e; }
+  .zorro-frame-url {
+    flex: 1;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .zorro-frame-wrap iframe {
+    width: 100%;
+    height: 520px;
+    border: none;
+    background: #fff;
+  }
+
+  /* ─── CONTENT HUB (STEP 3: CONTENT + COMMERCE) ─── */
+  .content-hub {
+    background: linear-gradient(180deg, transparent, rgba(167, 139, 250, 0.03), transparent);
+  }
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .article-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+    cursor: pointer;
+  }
+  .article-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(167, 139, 250, 0.2);
+  }
+  .article-img {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+  .article-img-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+  .article-img-bg.glp1 { background: linear-gradient(135deg, #0ea5e9, #2dd4bf); }
+  .article-img-bg.nutrition { background: linear-gradient(135deg, #22c55e, #84cc16); }
+  .article-img-bg.journey { background: linear-gradient(135deg, #a78bfa, #ec4899); }
+  .article-tag {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+  }
+  .article-body { padding: 1.5rem; }
+  .article-body h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .article-body p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  .article-cta {
+    color: var(--accent-teal);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: gap 0.3s;
+  }
+  .article-cta:hover { gap: 0.6rem; }
+
+  /* ─── BUNDLE (STEP 4) ─── */
+  .bundle-section {
+    background: linear-gradient(180deg, transparent, rgba(245, 158, 11, 0.03), transparent);
+  }
+  .bundle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .bundle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .bundle-card:hover {
+    transform: translateY(-4px);
+  }
+  .bundle-card.featured {
+    border-color: var(--accent-teal);
+    box-shadow: var(--glow-teal);
+  }
+  .bundle-card.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-teal);
+    color: var(--bg-deep);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+  }
+  .bundle-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1.5rem;
+  }
+  .bundle-card:nth-child(1) .bundle-icon { background: rgba(59, 130, 246, 0.15); }
+  .bundle-card:nth-child(2) .bundle-icon { background: var(--accent-teal-dim); }
+  .bundle-card:nth-child(3) .bundle-icon { background: rgba(245, 158, 11, 0.15); }
+  .bundle-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .bundle-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+  }
+  .bundle-price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+  .bundle-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .bundle-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  .bundle-features li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .bundle-features li::before {
+    content: '✓';
+    color: var(--accent-teal);
+    font-weight: 700;
+  }
+  .bundle-card .btn { width: 100%; justify-content: center; }
+
+  /* ─── SAVINGS CALCULATOR ─── */
+  .calc-section { text-align: center; }
+  .calc-card {
+    max-width: 600px;
+    margin: 3rem auto 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: var(--glow-teal);
+  }
+  .calc-card label {
+    display: block;
+    text-align: left;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+  .calc-card select, .calc-card input[type="text"] {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    margin-bottom: 1.25rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .calc-card select:focus, .calc-card input:focus {
+    border-color: var(--accent-teal);
+  }
+  .calc-card select option { background: var(--bg-card); }
+  .calc-result {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--accent-teal-dim);
+    border-radius: 16px;
+    border: 1px solid rgba(45, 212, 191, 0.2);
+  }
+  .calc-result .big-num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent-teal);
+  }
+  .calc-result p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+  }
+
+  /* ─── PARTNER BANNER ─── */
+  .partner-banner {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(45, 212, 191, 0.08), rgba(167, 139, 250, 0.08));
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .partner-banner p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+  .partner-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .partner-logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+  .partner-logo:hover { opacity: 1; }
+  .partner-logo.zorro {
+    color: var(--accent-gold);
+    opacity: 1;
+    font-size: 1.5rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 4rem 2rem 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand .nav-logo { margin-bottom: 1rem; }
+  .footer-brand p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    max-width: 300px;
+  }
+  .footer-col h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .footer-col a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--accent-teal); }
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .footer-disclaimer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+    margin-top: 1.5rem;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 0.8rem 1rem; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    section { padding: 4rem 1.25rem; }
+    .zorro-embed-inner { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .bundle-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-logo">Elev8 <span>Health</span></div>
+  <div class="nav-links">
+    <a href="#how-it-works">How It Works</a>
+    <a href="#rx-access">Rx Savings</a>
+    <a href="#learn">Learn</a>
+    <a href="#plans">Plans</a>
+    <a href="#rx-access" class="nav-cta">Check My Savings →</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg-orb"></div>
+  <div class="hero-bg-orb"></div>
+  <div class="hero-bg-orb"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ GLP-1 Access Made Simple</div>
+    <h1>Your Weight Loss<br>Journey, <em>Elevated</em></h1>
+    <p>Elev8 combines expert-backed wellness guidance with affordable Zepbound access — powered by our strategic partner ZorroCard.</p>
+    <div class="hero-actions">
+      <a href="#rx-access" class="btn btn-primary">Check Zepbound Savings →</a>
+      <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PARTNER BANNER ─── -->
+<div class="partner-banner">
+  <p>Strategic Rx Partnership</p>
+  <div class="partner-logos">
+    <div class="partner-logo zorro">⚡ ZorroCard</div>
+    <div class="partner-logo">LillyDirect</div>
+    <div class="partner-logo">Zepbound®</div>
+    <div class="partner-logo">FDA Approved</div>
+  </div>
+</div>
+
+<!-- ─── STEP 1: HOW IT WORKS / Rx ACCESS HUB ─── -->
+<section class="rx-hub" id="how-it-works">
+  <div class="container">
+    <div class="section-label">Step 1 — Elev8 Rx Access Hub</div>
+    <div class="section-title">Four steps to affordable Zepbound</div>
+    <p class="section-sub">We've partnered with ZorroCard to build the simplest path from interest to injection — no insurance headaches, no surprise costs.</p>
+
+    <div class="rx-steps">
+      <div class="rx-step reveal visible">
+        <div class="rx-step-num">01</div>
+        <h3>Explore</h3>
+        <p>Learn about GLP-1 medications, how tirzepatide works, and whether weight management Rx is right for you through our Elev8 content hub.</p>
+      </div>
+      <div class="rx-step reveal visible">
+        <div class="rx-step-num">02</div>
+        <h3>Check Savings</h3>
+        <p>Use the ZorroCard-powered savings tool below to see your price — whether you're insured, self-pay, or on a government plan.</p>
+      </div>
+      <div class="rx-step reveal visible">
+        <div class="rx-step-num">03</div>
+        <h3>Get Your Rx</h3>
+        <p>Connect with a licensed provider through our partner network. If clinically appropriate, get your Zepbound prescription filled and shipped.</p>
+      </div>
+      <div class="rx-step reveal visible">
+        <div class="rx-step-num">04</div>
+        <h3>Elev8 Support</h3>
+        <p>Pair your medication with Elev8's nutrition plans, coaching, and community to maximize results and sustain your transformation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STEP 2: ZORROCARD EMBEDDED REFERRAL FUNNEL ─── -->
+<section class="zorro-embed" id="rx-access">
+  <div class="container">
+    <div class="zorro-embed-inner">
+      <div class="zorro-info reveal visible">
+        <div class="section-label">Step 2 — Powered by ZorroCard</div>
+        <h3>See your Zepbound price in&nbsp;seconds</h3>
+        <p>ZorroCard is our strategic Rx savings partner — helping Elev8 members access Zepbound at the lowest available price, with or without insurance.</p>
+        <ul class="zorro-features">
+          <li><span class="icon">✓</span> Starting at $299/mo self-pay through LillyDirect</li>
+          <li><span class="icon">✓</span> As low as $25/mo with qualifying commercial insurance</li>
+          <li><span class="icon">✓</span> No hidden fees — transparent pricing upfront</li>
+          <li><span class="icon">✓</span> Savings card enrollment assistance included</li>
+          <li><span class="icon">✓</span> Available in single-dose vials and new KwikPen</li>
+        </ul>
+        <a href="https://zepboundzc.lovable.app/" target="_blank" class="btn btn-primary">Check My Savings on ZorroCard →</a>
+      </div>
+      <div class="zorro-frame-wrap reveal visible">
+        <div class="zorro-frame-bar">
+          <div class="zorro-frame-dot"></div>
+          <div class="zorro-frame-dot"></div>
+          <div class="zorro-frame-dot"></div>
+          <div class="zorro-frame-url">zepboundzc.lovable.app</div>
+        </div>
+        <iframe src="https://zepboundzc.lovable.app/" title="ZorroCard — Get Your Zepbound Affordably" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SAVINGS CALCULATOR ─── -->
+<section class="calc-section">
+  <div class="container">
+    <div class="section-label">Savings Estimator</div>
+    <div class="section-title" style="text-align:center;">Estimate your monthly cost</div>
+    <p class="section-sub" style="margin:0 auto;">See what you could pay for Zepbound through Elev8 + ZorroCard.</p>
+
+    <div class="calc-card reveal visible">
+      <label for="insurance">Insurance Status</label>
+      <select id="insurance" onchange="calcSavings()">
+        <option value="">Select your situation…</option>
+        <option value="covered">Commercial insurance — Zepbound covered</option>
+        <option value="notcovered">Commercial insurance — Zepbound NOT covered</option>
+        <option value="selfpay">No insurance / Self-pay</option>
+        <option value="government">Medicare / Medicaid</option>
+      </select>
+
+      <label for="dose">Dose</label>
+      <select id="dose" onchange="calcSavings()">
+        <option value="">Select dose…</option>
+        <option value="2.5">2.5 mg (starting dose)</option>
+        <option value="5">5 mg</option>
+        <option value="7.5">7.5 mg</option>
+        <option value="10">10 mg</option>
+        <option value="12.5">12.5 mg</option>
+        <option value="15">15 mg</option>
+      </select>
+
+      <div id="calc-result" class="calc-result" style="display: block;">
+        <div class="big-num" id="calc-price">$399/mo</div>
+        <p id="calc-note">Self-pay pricing through LillyDirect via ZorroCard. Includes vials or KwikPen options.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STEP 3: CONTENT + COMMERCE ─── -->
+<section class="content-hub" id="learn">
+  <div class="container">
+    <div class="section-label">Step 3 — Elev8 Knowledge Hub</div>
+    <div class="section-title">Learn before you leap</div>
+    <p class="section-sub">Expert-written guides so you make informed decisions about your health — then take action with ZorroCard when you're ready.</p>
+
+    <div class="article-grid">
+      <div class="article-card reveal visible">
+        <div class="article-img">
+          <div class="article-img-bg glp1">💉</div>
+          <span class="article-tag">GLP-1 Guide</span>
+        </div>
+        <div class="article-body">
+          <h3>What Is Zepbound? A Complete Breakdown</h3>
+          <p>Understand how tirzepatide (the active ingredient in Zepbound) targets GIP and GLP-1 receptors to support sustainable weight loss.</p>
+          <a href="#rx-access" class="article-cta">Read &amp; check savings →</a>
+        </div>
+      </div>
+
+      <div class="article-card reveal visible">
+        <div class="article-img">
+          <div class="article-img-bg nutrition">🥗</div>
+          <span class="article-tag">Nutrition</span>
+        </div>
+        <div class="article-body">
+          <h3>Eating on a GLP-1: What to Know</h3>
+          <p>Maximize your results by pairing medication with the right nutrition plan. We cover protein targets, meal timing, and managing appetite changes.</p>
+          <a href="#rx-access" class="article-cta">Read &amp; check savings →</a>
+        </div>
+      </div>
+
+      <div class="article-card reveal visible">
+        <div class="article-img">
+          <div class="article-img-bg journey">🏔️</div>
+          <span class="article-tag">Journeys</span>
+        </div>
+        <div class="article-body">
+          <h3>Real Stories: Members Who Transformed</h3>
+          <p>Hear from Elev8 members who combined Zepbound access via ZorroCard with lifestyle coaching to achieve lasting results.</p>
+          <a href="#rx-access" class="article-cta">Read &amp; check savings →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STEP 4: BUNDLE PLAY / PRICING ─── -->
+<section class="bundle-section" id="plans">
+  <div class="container">
+    <div class="section-label" style="text-align:center;">Step 4 — The Complete Package</div>
+    <div class="section-title" style="text-align:center;">Medication + lifestyle = lasting results</div>
+    <p class="section-sub" style="margin:0 auto; text-align:center;">Zepbound works best alongside proper nutrition, movement, and coaching. Pick the Elev8 plan that fits your life.</p>
+
+    <div class="bundle-grid">
+      <!-- PLAN 1 -->
+      <div class="bundle-card reveal visible">
+        <div class="bundle-icon">🔍</div>
+        <h3>Explore</h3>
+        <div class="bundle-price">Free</div>
+        <p class="bundle-desc">Get educated and see your options</p>
+        <ul class="bundle-features">
+          <li>Full content hub access</li>
+          <li>ZorroCard savings checker</li>
+          <li>GLP-1 education guides</li>
+          <li>Community forum access</li>
+        </ul>
+        <a href="#rx-access" class="btn btn-outline">Get Started</a>
+      </div>
+
+      <!-- PLAN 2 -->
+      <div class="bundle-card featured reveal visible">
+        <div class="bundle-icon">⚡</div>
+        <h3>Elev8 + Rx</h3>
+        <div class="bundle-price">$49<span>/mo</span></div>
+        <p class="bundle-desc">Coaching + affordable Rx access</p>
+        <ul class="bundle-features">
+          <li>Everything in Explore</li>
+          <li>Priority ZorroCard Rx access</li>
+          <li>1-on-1 wellness coaching</li>
+          <li>Custom nutrition plans</li>
+          <li>Weekly check-ins</li>
+        </ul>
+        <a href="#rx-access" class="btn btn-primary">Start Your Journey</a>
+      </div>
+
+      <!-- PLAN 3 -->
+      <div class="bundle-card reveal visible">
+        <div class="bundle-icon">👑</div>
+        <h3>Elev8 Total</h3>
+        <div class="bundle-price">$99<span>/mo</span></div>
+        <p class="bundle-desc">The full transformation package</p>
+        <ul class="bundle-features">
+          <li>Everything in Elev8 + Rx</li>
+          <li>Dedicated health concierge</li>
+          <li>Lab work coordination</li>
+          <li>Exercise programming</li>
+          <li>Insurance advocacy support</li>
+        </ul>
+        <a href="#rx-access" class="btn btn-gold">Go All In</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">Elev8 <span>Health</span></div>
+      <p>Elevating access to weight management through education, technology, and strategic Rx partnerships.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#rx-access">Rx Savings</a>
+      <a href="#learn">Learn</a>
+      <a href="#plans">Plans</a>
+    </div>
+    <div class="footer-col">
+      <h4>Partners</h4>
+      <a href="https://zepboundzc.lovable.app/" target="_blank">ZorroCard</a>
+      <a href="#">Provider Network</a>
+      <a href="#">Pharmacy Partners</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Contact Us</a>
+      <a href="#">FAQ</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+
+  <div class="footer-disclaimer">
+    <strong>Important Safety &amp; Legal Information:</strong> Zepbound® (tirzepatide) is a prescription medication. Elev8 Health does not prescribe, dispense, or provide medical advice. All Rx access is facilitated through licensed providers and pharmacy partners. ZorroCard is an independent strategic partner. Savings amounts are estimates and may vary based on insurance status, location, and eligibility. Zepbound® is a registered trademark of Eli Lilly and Company. Elev8 Health is not affiliated with Eli Lilly. Always consult your healthcare provider before starting any medication. Program terms, pricing, and availability are subject to change.
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Elev8 Health. All rights reserved.</span>
+    <span>Strategic Rx Partner: ZorroCard</span>
+  </div>
+</footer>
+
+<script>
+  // ─── SCROLL REVEAL ───
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ─── SAVINGS CALCULATOR ───
+  function calcSavings() {
+    const ins = document.getElementById('insurance').value;
+    const dose = document.getElementById('dose').value;
+    const result = document.getElementById('calc-result');
+    const price = document.getElementById('calc-price');
+    const note = document.getElementById('calc-note');
+
+    if (!ins || !dose) { result.style.display = 'none'; return; }
+
+    let priceVal, noteVal;
+    const doseNum = parseFloat(dose);
+
+    if (ins === 'covered') {
+      priceVal = '$25/mo';
+      noteVal = 'With qualifying commercial insurance + Zepbound Savings Card. Up to $1,300/year max.';
+    } else if (ins === 'notcovered') {
+      priceVal = '$499/mo';
+      noteVal = 'With commercial insurance that doesn\'t cover Zepbound + Savings Card. ZorroCard can help find better options.';
+    } else if (ins === 'selfpay') {
+      if (doseNum <= 2.5) priceVal = '$299/mo';
+      else if (doseNum <= 5) priceVal = '$399/mo';
+      else priceVal = '$449/mo';
+      noteVal = 'Self-pay pricing through LillyDirect via ZorroCard. Includes vials or KwikPen options.';
+    } else if (ins === 'government') {
+      priceVal = 'Check back mid-2026';
+      noteVal = 'Medicare Part D coverage for weight loss is expected mid-2026. ZorroCard will update options as they become available.';
+    }
+
+    price.textContent = priceVal;
+    note.textContent = noteVal;
+    result.style.display = 'block';
+  }
+</script>
+
+
+</body></html>
